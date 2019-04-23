@@ -28,8 +28,7 @@ CREATE TABLE People(
 	CONSTRAINT People_AltPK UNIQUE (NetID, TypeID)
 );
 
--- Subtypes
--- Student Entity
+-- Subtype: Student Entity
 CREATE TABLE Student(
 	NetID CHAR(6) NOT NULL,
 	TypeID INT NOT NULL DEFAULT 1 CHECK (TypeID = 1), --TypeID =1 stands for Student
@@ -38,7 +37,7 @@ CREATE TABLE Student(
 	CONSTRAINT Student_PK PRIMARY KEY (NetID),
 	CONSTRAINT Student_FK FOREIGN KEY (NetID, TypeID) REFERENCES People(NetID, TypeID)
 )
--- Instructor Entity
+-- Subtype: Instructor Entity
 CREATE TABLE Instructor(
 	NetID CHAR(6) NOT NULL,
 	TypeID INT NOT NULL DEFAULT 2 CHECK (TypeID = 2), --TypeID =2 stands for Instructor
