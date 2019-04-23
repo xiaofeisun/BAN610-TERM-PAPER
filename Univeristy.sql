@@ -32,7 +32,7 @@ CREATE TABLE People(
 -- Student Entity
 CREATE TABLE Student(
 	NetID CHAR(6) NOT NULL,
-	TypeID INT NOT NULL DEFAULT 1 CHECK (TypeID = 1),
+	TypeID INT NOT NULL DEFAULT 1 CHECK (TypeID = 1), --TypeID =1 stands for Student
 	Major VARCHAR(20),
 	GraducationSemester VARCHAR(10),
 	CONSTRAINT Student_PK PRIMARY KEY (NetID),
@@ -41,7 +41,7 @@ CREATE TABLE Student(
 -- Instructor Entity
 CREATE TABLE Instructor(
 	NetID CHAR(6) NOT NULL,
-	TypeID INT NOT NULL DEFAULT 2 CHECK (TypeID = 2),
+	TypeID INT NOT NULL DEFAULT 2 CHECK (TypeID = 2), --TypeID =2 stands for Instructor
 	InstructorOffice VARCHAR(10),
 	CONSTRAINT Instructor_PK PRIMARY KEY (NetID),
 	CONSTRAINT Instructor_FK FOREIGN KEY (NetID, TypeID) REFERENCES People(NetID, TypeID),
