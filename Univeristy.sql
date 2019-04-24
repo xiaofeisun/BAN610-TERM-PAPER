@@ -53,7 +53,7 @@ CREATE TABLE Course(
 	Prerequisite VARCHAR(10),
 	Prerequisite_2 VARCHAR (10),
 	CourseName VARCHAR(30),
-	CreditHours FLOAT,
+	CreditHours DECIMAL(2,1),
 	Desciption TEXT,
 	CONSTRAINT Course_PK PRIMARY KEY (Course#),
 	CONSTRAINT Course_FK FOREIGN KEY (Prerequisite) REFERENCES Course(Course#),
