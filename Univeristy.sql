@@ -1,5 +1,5 @@
 CREATE DATABASE University;
--- test change comment added by pradeep
+
 USE University;
 
 --Location Entity
