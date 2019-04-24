@@ -60,6 +60,8 @@ CREATE TABLE Course(
 	CONSTRAINT Course_FK1 FOREIGN KEY (Prerequisite_2) REFERENCES Course(Course#)
 );
 
+--this is Qiqi
+
 --CourseBookList Entity
 CREATE TABLE CourseBookList(
 	ISBN INT NOT NULL,
