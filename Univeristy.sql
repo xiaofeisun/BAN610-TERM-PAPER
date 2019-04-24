@@ -9,7 +9,7 @@ CREATE TABLE Location(
 	Campus VARCHAR(20),
 	CONSTRAINT Location_PK PRIMARY KEY (LocationID)
 );
-
+dm
 --PersonType Entity is to implement inheritance 
 CREATE TABLE PersonType(
 	TypeID int,
