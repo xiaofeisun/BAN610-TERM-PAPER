@@ -9,7 +9,7 @@ CREATE TABLE Location(
 	Campus VARCHAR(20),
 	CONSTRAINT Location_PK PRIMARY KEY (LocationID)
 );
-dm
+
 --PersonType Entity is to implement inheritance 
 CREATE TABLE PersonType(
 	TypeID int,
@@ -60,7 +60,6 @@ CREATE TABLE Course(
 	CONSTRAINT Course_FK1 FOREIGN KEY (Prerequisite_2) REFERENCES Course(Course#)
 );
 
---this is Qiqi
 
 --CourseBookList Entity
 CREATE TABLE CourseBookList(
@@ -103,4 +102,4 @@ CREATE TABLE Enrollment(
 	CONSTRAINT Enrollment_FK FOREIGN KEY (StudentID) REFERENCES Student(NetID),
 	CONSTRAINT Enrollment_FK1 FOREIGN KEY (Class#, Semester) REFERENCES ClassList(Class#,Semester)
 );
---comment
+
