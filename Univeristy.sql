@@ -28,6 +28,7 @@ CREATE TABLE People (
 	,PFirstName VARCHAR(30) NOT NULL
 	,PLastName VARCHAR(20) NOT NULL
 	,Email VARCHAR(40) NOT NULL
+	,Gender CHAR(1) CHECK (Gender IN ('M','F','O')) 
 	,CONSTRAINT People_PK PRIMARY KEY (NetID)
 	,CONSTRAINT People_FK FOREIGN KEY (TypeID) REFERENCES PersonType(TypeID)
 --	,CONSTRAINT People_AltPK UNIQUE (NetID, TypeID)
@@ -43,6 +44,7 @@ CREATE TABLE Student(
 	,CONSTRAINT Student_PK PRIMARY KEY (NetID)
 --	,CONSTRAINT Student_FK FOREIGN KEY (NetID, TypeID) REFERENCES People(NetID, TypeID)
 );
+
 -- Subtype: Instructor Entity
 CREATE TABLE Instructor (
 	NetID CHAR(6) NOT NULL
@@ -55,27 +57,52 @@ CREATE TABLE Instructor (
 
 -- Course Table and have unary relationship
 CREATE TABLE Course (
-	Course# VARCHAR(10) NOT NULL,
-	Prerequisite VARCHAR(10),
-	Prerequisite_2 VARCHAR (10),
-	CourseName VARCHAR(30),
-	CreditHours DECIMAL(2,1),
-	Desciption TEXT,
-	CONSTRAINT Course_PK PRIMARY KEY (Course#),
-	CONSTRAINT Course_FK FOREIGN KEY (Prerequisite) REFERENCES Course(Course#),
-	CONSTRAINT Course_FK1 FOREIGN KEY (Prerequisite_2) REFERENCES Course(Course#)
+	CourseID VARCHAR(10) NOT NULL
+	,CourseName VARCHAR(40)
+	,CreditHours DECIMAL(2,1)
+	,Desciption TEXT
+	,PreRequisite_1 VARCHAR(10)
+	,PreRequisite_2 VARCHAR(10)
+	,CONSTRAINT Course_PK PRIMARY KEY (CourseID)
+	,CONSTRAINT Course_FK1 FOREIGN KEY (PreRequisite_1) REFERENCES Course(CourseID)
+	,CONSTRAINT Course_FK2 FOREIGN KEY (PreRequisite_2) REFERENCES Course(CourseID)
 );
 
 
 --CourseBookList Entity
-CREATE TABLE CourseBookList(
-	ISBN INT NOT NULL,
-	CourseBookName VARCHAR(40),
-	CourseBookPublisher VARCHAR(30),
-	Author VARCHAR(30),
-	Edition VARCHAR(10)
-	CONSTRAINT CourseBookList_PK PRIMARY KEY (ISBN)
+CREATE TABLE Publisher (
+	PublisherID INT
+	,PublisherName VARCHAR(30) NOT NULL
+	,PublisherCity VARCHAR(20) 
+	,PublisherState VARCHAR(15) 
+	,PublisherCountry VARCHAR(20) NOT NULL
+	,CONSTRAINT Publisher_PK PRIMARY KEY (PublisherID)
 );
+				       
+--CourseBookList Entity
+CREATE TABLE Author (
+	AuthorID INT
+	,AuthorFirstName VARCHAR(30)
+	,AuthorLastName VARCHAR(20)
+	,AuthorGender CHAR(1) CHECK (AuthorGender in ('M','F','O'))
+	,AuthorCountry VARCHAR(20)
+	,CONSTRAINT Author_PK PRIMARY KEY (AuthorID)
+);
+				       
+				       
+--CourseBookList Entity
+CREATE TABLE CourseBookList (
+	ISBN INT
+	,BookName VARCHAR(100) NOT NULL
+	,Edition VARCHAR(2) NOT NULL
+	,EditionYear INT NOT NULL
+	,AuthorID VARCHAR(30) NOT NULL
+	,PublisherID INT NOT NULL
+	,CONSTRAINT CourseBookList_PK PRIMARY KEY (ISBN)
+	,CONSTRAINT CourseBook_FK1 FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
+	,CONSTRAINT CourseBook_FK2 FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
+);
+       
 
 -- ClassList Entity
 CREATE TABLE ClassList(
