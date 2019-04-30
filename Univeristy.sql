@@ -154,6 +154,7 @@ CREATE TABLE Grade (
 CREATE TABLE Enrollment (
 	StudentID CHAR(6) NOT NULL
 	,ClassID INT NOT NULL
+	,SectionNo INT NOT NULL
 	,ResultGrade CHAR(2)
 	,CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,ClassID)
 	,CONSTRAINT Enrollment_FK FOREIGN KEY (StudentID) REFERENCES Student(NetID)
