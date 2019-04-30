@@ -133,7 +133,7 @@ CREATE TABLE ClassList (
 	,CourseClassRoom VARCHAR(10) NOT NULL
 	,CourseBook_1 INT  
 	,CourseBook_2 INT
-	,CONSTRAINT ClassList_PK PRIMARY KEY (ClassID, SectionNo)
+	,CONSTRAINT ClassList_PK PRIMARY KEY (ClassID)
 	,CONSTRAINT ClassList_FK1 FOREIGN KEY (Course#) REFERENCES Course(Course#)
 	,CONSTRAINT ClassList_FK2 FOREIGN KEY (InstructorID) REFERENCES Instructor(NetID)
 	,CONSTRAINT ClassList_FK3 FOREIGN KEY (CourseClassRoom) REFERENCES Location(LocationID)
@@ -154,11 +154,10 @@ CREATE TABLE Grade (
 CREATE TABLE Enrollment (
 	StudentID CHAR(6) NOT NULL
 	,ClassID INT NOT NULL
-	,SectionNo INT NOT NULL
 	,ResultGrade CHAR(2)
 	,CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,ClassID)
 	,CONSTRAINT Enrollment_FK FOREIGN KEY (StudentID) REFERENCES Student(NetID)
-	,CONSTRAINT Enrollment_FK1 FOREIGN KEY (ClassID,SectionNo) REFERENCES ClassList(ClassID,SectionNo)
+	,CONSTRAINT Enrollment_FK1 FOREIGN KEY (ClassID) REFERENCES ClassList(ClassID)
 	,CONSTRAINT Enrollment_FK2 FOREIGN KEY (ResultGrade) REFERENCES Grade(ResultGrade)	
 );
 
