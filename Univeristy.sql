@@ -57,15 +57,15 @@ CREATE TABLE Instructor (
 
 -- Course Entity with Unary relationship
 CREATE TABLE Course (
-	CourseID VARCHAR(10) 
+	Course# VARCHAR(10) 
 	,CourseName VARCHAR(40) NOT NULL
 	,CreditHours REAL NOT NULL
 	,Desciption TEXT 
 	,PreRequisite_1 VARCHAR(10)
 	,PreRequisite_2 VARCHAR(10)
-	,CONSTRAINT Course_PK PRIMARY KEY (CourseID)
-	,CONSTRAINT Course_FK1 FOREIGN KEY (PreRequisite_1) REFERENCES Course(CourseID)
-	,CONSTRAINT Course_FK2 FOREIGN KEY (PreRequisite_2) REFERENCES Course(CourseID)
+	,CONSTRAINT Course_PK PRIMARY KEY (Course#)
+	,CONSTRAINT Course_FK1 FOREIGN KEY (PreRequisite_1) REFERENCES Course(Course#)
+	,CONSTRAINT Course_FK2 FOREIGN KEY (PreRequisite_2) REFERENCES Course(Course#)
 );
 
 
@@ -90,8 +90,8 @@ CREATE TABLE Author (
 );
 				       
 				       
---BookList Entity
-CREATE TABLE BookList (
+--Book Entity
+CREATE TABLE Book (
 	ISBN INT
 	,BookName VARCHAR(100) NOT NULL
 	,Edition VARCHAR(2) NOT NULL
@@ -101,7 +101,7 @@ CREATE TABLE BookList (
 	,AuthorID_3 VARCHAR(30) 
 	,AuthorID_4 VARCHAR(30) 
 	,PublisherID INT NOT NULL
-	,CONSTRAINT BookList_PK PRIMARY KEY (ISBN)
+	,CONSTRAINT Book_PK PRIMARY KEY (ISBN)
 	,CONSTRAINT Book_FK1 FOREIGN KEY (AuthorID_1) REFERENCES Author(AuthorID)
 	,CONSTRAINT Book_FK2 FOREIGN KEY (AuthorID_2) REFERENCES Author(AuthorID)
 	,CONSTRAINT Book_FK3 FOREIGN KEY (AuthorID_3) REFERENCES Author(AuthorID)
@@ -115,7 +115,7 @@ CREATE TABLE ClassList (
 	ClassID INT NOT NULL
 	,ClassSemester VARCHAR(10) CHECK (ClassSemester in ('Spring','Summer','Fall','Winter')) NOT NULL
 	,ClassYear INT NOT NULL
-	,CourseID VARCHAR(10) NOT NULL
+	,Course# VARCHAR(10) NOT NULL
 	,SectionNo INT NOT NULL
 	,InstructorID CHAR(6) NOT NULL
 	,MeetingDay1 VARCHAR(10) NOT NULL
@@ -130,24 +130,34 @@ CREATE TABLE ClassList (
 	,MeetingDay4 VARCHAR(10)
 	,StartTime4 TIME
 	,EndTime4 TIME
-	,ClassRoom VARCHAR(10) NOT NULL
-	,Book_1 INT  
-	,Book_2 INT
+	,CourseClassRoom VARCHAR(10) NOT NULL
+	,CourseBook_1 INT  
+	,CourseBook_2 INT
 	,CONSTRAINT ClassList_PK PRIMARY KEY (ClassID, SectionNo)
-	,CONSTRAINT ClassList_FK1 FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+	,CONSTRAINT ClassList_FK1 FOREIGN KEY (Course#) REFERENCES Course(Course#)
 	,CONSTRAINT ClassList_FK2 FOREIGN KEY (InstructorID) REFERENCES Instructor(NetID)
-	,CONSTRAINT ClassList_FK3 FOREIGN KEY (ClassRoom) REFERENCES Location(LocationID)
-	,CONSTRAINT ClassList_FK4 FOREIGN KEY (Book_1) REFERENCES BookList(ISBN)
-	,CONSTRAINT ClassList_FK5 FOREIGN KEY (Book_2) REFERENCES BookList(ISBN)
+	,CONSTRAINT ClassList_FK3 FOREIGN KEY (CourseClassRoom) REFERENCES Location(LocationID)
+	,CONSTRAINT ClassList_FK4 FOREIGN KEY (CourseBook_1) REFERENCES Book(ISBN)
+	,CONSTRAINT ClassList_FK5 FOREIGN KEY (CourseBook_2) REFERENCES Book(ISBN)
 );
 
+--Grade Entity
+CREATE TABLE Grade (
+	ResultGrade VARCHAR(2) 
+	,MaxPercent INT UNIQUE CHECK (MaxPercent BETWEEN 0 AND 100)
+	,MinPercent INT UNIQUE CHECK (MinPercent BETWEEN 0 AND 100)
+	,CONSTRAINT Grade_PK PRIMARY KEY (ResultGrade)
+	,CONSTRAINT Grade_Check1 CHECK (MaxPercent > MinPercent)
+);					  
+					  
 --Enrollment Entity
 CREATE TABLE Enrollment (
 	StudentID CHAR(6) NOT NULL
 	,ClassID INT NOT NULL
-	,LetterGrade CHAR(2)
+	,ResultGrade CHAR(2)
 	,CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,ClassID)
 	,CONSTRAINT Enrollment_FK FOREIGN KEY (StudentID) REFERENCES Student(NetID)
 	,CONSTRAINT Enrollment_FK1 FOREIGN KEY (ClassID,SectionNo) REFERENCES ClassList(ClassID,SectionNo)
+	,CONSTRAINT Enrollment_FK2 FOREIGN KEY (ResultGrade) REFERENCES Grade(ResultGrade)	
 );
 
