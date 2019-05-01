@@ -152,3 +152,125 @@ CREATE TABLE Enrollment (
 	CONSTRAINT Enrollment_FK1 FOREIGN KEY (StudentID) REFERENCES Student(NetID),
 	CONSTRAINT Enrollment_FK2 FOREIGN KEY (Class#) REFERENCES Class(Class#)
 );
+				      
+-- Insert value to Location Entity
+BULK
+INSERT Location
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				  
+-- Insert value to PersonType Entity
+BULK
+INSERT PersonType
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+
+-- Insert value to People Entity
+BULK
+INSERT People
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Student Entity
+BULK
+INSERT Student
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Instructor Entity
+BULK
+INSERT Instructor
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Course Entity
+BULK
+INSERT Course
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Publisher Entity
+BULK
+INSERT Publisher
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Author Entity
+BULK
+INSERT Author
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Book Entity
+BULK
+INSERT Book
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Class Entity
+BULK
+INSERT Class
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
+-- Insert value to Enrollment Entity
+BULK
+INSERT Enrollment
+FROM 'FILE PATH'
+WITH
+(
+	FIELDTERMINATOR=',',
+	ROWTERMINATOR='\n'
+)
+GO
+				      
