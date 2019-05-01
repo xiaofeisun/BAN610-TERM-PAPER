@@ -107,7 +107,7 @@ CREATE TABLE Book (
 				     
 -- Class Entity
 CREATE TABLE Class (
-	Class# INT CHECK (Class# BETWEEN 1000 and 9999), 
+	Class# CHAR(4) CHECK (Class# LIKE '[0-9][0-9][0-9][0-9]'), 
 	ClassSemester VARCHAR(10) CHECK (ClassSemester in ('Spring','Summer','Fall','Winter')) NOT NULL,
 	ClassYear INT CHECK (ClassYear BETWEEN 2000 AND 2030) NOT NULL, 
 	Course# VARCHAR(10) NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE Class (
 --Enrollment Entity
 CREATE TABLE Enrollment (
 	StudentID CHAR(6) NOT NULL,
-	Class# INT NOT NULL,
+	Class# CHAR(4) NOT NULL,
 	ResultGrade VARCHAR(2) CHECK (ResultGrade IN ('A','A-','B','B-','C','C-','D','F','IP')) DEFAULT 'IP' NOT NULL,
 	CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#),
 	CONSTRAINT Enrollment_FK1 FOREIGN KEY (StudentID) REFERENCES Student(NetID),
