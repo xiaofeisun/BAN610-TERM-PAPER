@@ -22,7 +22,7 @@ CREATE TABLE PersonType (
 
 -- SuperType: People Entity
 CREATE TABLE People (
-	NetID CHAR(6),
+	NetID CHAR(6) CHECK (NetID LIKE '[a-z][a-z][1-9][0-9][0-9][0-9]'),
 	TypeID CHAR(1) NOT NULL,
 	PFirstName VARCHAR(30) NOT NULL,
 	PLastName VARCHAR(20) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Instructor (
 CREATE TABLE Course (
 	Course# VARCHAR(10), 
 	CourseName VARCHAR(40) NOT NULL,
-	CreditHours REAL CHECK (CreditHours BETWEEN 0.5 AND 6) NOT NULL,
+	CreditHours REAL CHECK (CreditHours IN (0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6)) NOT NULL,
 	Desciption TEXT, 
 	PreRequisite_1 VARCHAR(10),
 	PreRequisite_2 VARCHAR(10),
@@ -107,25 +107,25 @@ CREATE TABLE Book (
 				     
 -- Class Entity
 CREATE TABLE Class (
-	Class# INT, 
+	Class# INT CHECK (Class# BETWEEN 1000 and 9999), 
 	ClassSemester VARCHAR(10) CHECK (ClassSemester in ('Spring','Summer','Fall','Winter')) NOT NULL,
 	ClassYear INT CHECK (ClassYear BETWEEN 2000 AND 2030) NOT NULL, 
 	Course# VARCHAR(10) NOT NULL,
-	SectionNo INT CHECK (SectionNo BETWEEN 1 AND 5),
+	SectionNo INT CHECK (SectionNo BETWEEN 1 AND 5) DEFAULT 1,
 	InstructorID CHAR(6) NOT NULL,
-	MeetingDay1 VARCHAR(2) CHECK (MeetingDay1 in ('M','Tu','W','Th','F','Sa','Su')) NOT NULL,
-	StartTime1 TIME NOT NULL,
-	EndTime1 TIME NOT NULL,
+	MeetingDay1 VARCHAR(3) CHECK (MeetingDay1 in ('M','Tu','W','Th','F','Sa','Su','TBA')) NOT NULL,
+	StartTime1 TIME,
+	EndTime1 TIME,
 	CourseClassRoom1 VARCHAR(10) NOT NULL,					       
-	MeetingDay2 VARCHAR(2) CHECK (MeetingDay2 in ('M','Tu','W','Th','F','Sa','Su')),
+	MeetingDay2 VARCHAR(3) CHECK (MeetingDay2 in ('M','Tu','W','Th','F','Sa','Su','TBA')),
 	StartTime2 TIME,
 	EndTime2 TIME,
 	CourseClassRoom2 VARCHAR(10),
-	MeetingDay3 VARCHAR(2) CHECK (MeetingDay3 in ('M','Tu','W','Th','F','Sa','Su')),
+	MeetingDay3 VARCHAR(3) CHECK (MeetingDay3 in ('M','Tu','W','Th','F','Sa','Su','TBA')),
 	StartTime3 TIME,
 	EndTime3 TIME,
 	CourseClassRoom3 VARCHAR(10),
-	MeetingDay4 VARCHAR(2) CHECK (MeetingDay4 in ('M','Tu','W','Th','F','Sa','Su')),
+	MeetingDay4 VARCHAR(3) CHECK (MeetingDay4 in ('M','Tu','W','Th','F','Sa','Su','TBA')),
 	StartTime4 TIME,
 	EndTime4 TIME,
 	CourseClassRoom4 VARCHAR(10),
