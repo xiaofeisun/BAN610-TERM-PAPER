@@ -14,46 +14,43 @@ CREATE TABLE Location (
 				   
 
 --PersonType Entity is to implement inheritance 
---CREATE TABLE PersonType (
---	TypeID CHAR(1) CHECK (TypeID in ('S','I'))
---	,PersonType CHAR(10) CHECK (PersonType in ('Student','Instructor')) NOT NULL
---	,CONSTRAINT PersonType_PK PRIMARY KEY (TypeID)
---);
+CREATE TABLE PersonType (
+	TypeID CHAR(1) CHECK (TypeID in ('S','I'))
+	,PersonType CHAR(10) CHECK (PersonType in ('Student','Instructor')) NOT NULL
+	,CONSTRAINT PersonType_PK PRIMARY KEY (TypeID)
+);
 
 -- SuperType: People Entity
 CREATE TABLE People (
 	NetID CHAR(6)
---	,TypeID CHAR(1) NOT NULL
+	,TypeID CHAR(1) NOT NULL
 	,PFirstName VARCHAR(30) NOT NULL
 	,PLastName VARCHAR(20) NOT NULL
 	,Email VARCHAR(40) NOT NULL
 	,Gender CHAR(1) CHECK (Gender IN ('M','F','O')) NOT NULL
-	,CONSTRAINT People_PK PRIMARY KEY (NetID)
---	,CONSTRAINT People_AltPK UNIQUE (NetID,TypeID)
---	,CONSTRAINT People_FK1 FOREIGN KEY (TypeID) REFERENCES PersonType(TypeID)
+	,CONSTRAINT People_PK PRIMARY KEY (NetID,TypeID)
+	,CONSTRAINT People_FK1 FOREIGN KEY (TypeID) REFERENCES PersonType(TypeID)
 );
 
 -- Subtype: Student Entity
 CREATE TABLE Student (
 	NetID CHAR(6) 
---	,TypeID CHAR(1) DEFAULT 'S' CHECK (TypeID in ('S')) NOT NULL
+	,TypeID CHAR(1) DEFAULT 'S' CHECK (TypeID IN ('S')) NOT NULL
 	,Major VARCHAR(20) NOT NULL
 	,GraducationSemester VARCHAR(10) CHECK (GraducationSemester in ('Spring','Summer','Fall','Winter')) NOT NULL
 	,GraducationYear INT CHECK (GraducationYear BETWEEN 2000 AND 2030) NOT NULL					  
 	,CONSTRAINT Student_PK PRIMARY KEY (NetID)
---	,CONSTRAINT Student_FK1 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
-	,CONSTRAINT Student_FK1 FOREIGN KEY (NetID) REFERENCES People(NetID)
+	,CONSTRAINT Student_FK1 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
 );
 
 -- Subtype: Instructor Entity
 CREATE TABLE Instructor (
 	NetID CHAR(6) 
---	,TypeID CHAR(1) DEFAULT 'I' CHECK (TypeID in ('I')) NOT NULL
+	,TypeID CHAR(1) DEFAULT 'I' CHECK (TypeID in ('I')) NOT NULL
 	,InstructorOffice VARCHAR(10) NOT NULL
 	,CONSTRAINT Instructor_PK PRIMARY KEY (NetID) 
 	,CONSTRAINT Instructor_FK1 FOREIGN KEY (InstructorOffice) REFERENCES Location(LocationID)
---	,CONSTRAINT Instructor_FK2 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
-	,CONSTRAINT Instructor_FK2 FOREIGN KEY (NetID) REFERENCES People(NetID)
+	,CONSTRAINT Instructor_FK2 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
 );
 
 -- Course Entity with Unary relationship
