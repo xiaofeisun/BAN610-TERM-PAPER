@@ -30,7 +30,7 @@ CREATE TABLE People (
 	,Gender CHAR(1) CHECK (Gender IN ('M','F','O')) NOT NULL
 	,CONSTRAINT People_PK PRIMARY KEY (NetID)
 	,CONSTRAINT People_AltPK UNIQUE (NetID,TypeID)
-	,CONSTRAINT People_FK FOREIGN KEY (TypeID) REFERENCES PersonType(TypeID)
+	,CONSTRAINT People_FK1 FOREIGN KEY (TypeID) REFERENCES PersonType(TypeID)
 );
 
 -- Subtype: Student Entity
@@ -41,7 +41,7 @@ CREATE TABLE Student (
 	,GraducationSemester VARCHAR(10) CHECK (GraducationSemester in ('Spring','Summer','Fall','Winter')) NOT NULL
 	,GraducationYear INT CHECK (GraducationYear BETWEEN 2000 AND 2030) NOT NULL					  
 	,CONSTRAINT Student_PK PRIMARY KEY (NetID)
-	,CONSTRAINT Student_FK FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
+	,CONSTRAINT Student_FK1 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
 );
 
 -- Subtype: Instructor Entity
@@ -50,8 +50,8 @@ CREATE TABLE Instructor (
 	,TypeID CHAR(1) DEFAULT 'I' CHECK (TypeID in ('I')) NOT NULL
 	,InstructorOffice VARCHAR(10) NOT NULL
 	,CONSTRAINT Instructor_PK PRIMARY KEY (NetID) 
-	,CONSTRAINT Instructor_FK FOREIGN KEY (InstructorOffice) REFERENCES Location(LocationID)
-	,CONSTRAINT Instructor_FK1 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
+	,CONSTRAINT Instructor_FK1 FOREIGN KEY (InstructorOffice) REFERENCES Location(LocationID)
+	,CONSTRAINT Instructor_FK2 FOREIGN KEY (NetID,TypeID) REFERENCES People(NetID,TypeID)
 );
 
 -- Course Entity with Unary relationship
@@ -150,6 +150,6 @@ CREATE TABLE Enrollment (
 	,Class# INT NOT NULL
 	,ResultGrade VARCHAR(2) CHECK (ResultGrade IN ('A','A-','B','B-','C','C-','D','F','IP')) DEFAULT 'IP' NOT NULL
 	,CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#)
-	,CONSTRAINT Enrollment_FK FOREIGN KEY (StudentID) REFERENCES Student(NetID)
-	,CONSTRAINT Enrollment_FK1 FOREIGN KEY (Class#) REFERENCES Class(Class#)
+	,CONSTRAINT Enrollment_FK1 FOREIGN KEY (StudentID) REFERENCES Student(NetID)
+	,CONSTRAINT Enrollment_FK2 FOREIGN KEY (Class#) REFERENCES Class(Class#)
 );
