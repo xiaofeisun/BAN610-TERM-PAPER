@@ -37,6 +37,7 @@ CREATE TABLE Student (
 	NetID CHAR(6), 
 	TypeID CHAR(1) DEFAULT 'S' CHECK (TypeID IN ('S')) NOT NULL,
 	Major VARCHAR(20) NOT NULL,
+	TypeOfDegree VARCHAR(25) CHECK(TypeOfDegree IN ('Undergraduate','Postbaccalaureate','Non-credit Extension')) NOT NULL,
 	GraducationSemester VARCHAR(10) CHECK (GraducationSemester in ('Spring','Summer','Fall','Winter')) NOT NULL,
 	GraducationYear INT CHECK (GraducationYear BETWEEN 2000 AND 2030) NOT NULL,					  
 	CONSTRAINT Student_PK PRIMARY KEY (NetID),
