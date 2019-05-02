@@ -150,7 +150,7 @@ CREATE TABLE Enrollment (
 	ClassSemester VARCHAR(10) NOT NULL,
 	ClassYear INT NOT NULL, 
 	ResultGrade VARCHAR(2) CHECK (ResultGrade IN ('A','A-','B','B-','C','C-','D','F','IP')) DEFAULT 'IP' NOT NULL,
-	CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#,,ClassSemester,ClassYear),
+	CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#,ClassSemester,ClassYear),
 	CONSTRAINT Enrollment_FK1 FOREIGN KEY (StudentID) REFERENCES Student(NetID),
 	CONSTRAINT Enrollment_FK2 FOREIGN KEY (Class#,ClassSemester,ClassYear) REFERENCES Class(Class#,ClassSemester,ClassYear)
 );
