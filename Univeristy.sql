@@ -131,7 +131,7 @@ CREATE TABLE Class (
 	CourseClassRoom4 VARCHAR(10),
 	CourseBook_1 INT,
 	CourseBook_2 INT,
-	CONSTRAINT Class_PK PRIMARY KEY (Class#),
+	CONSTRAINT Class_PK PRIMARY KEY (Class#,ClassSemester,ClassYear),
 	CONSTRAINT Class_Alt_PK UNIQUE (ClassSemester,ClassYear,Course#,SectionNo),
 	CONSTRAINT Class_FK1 FOREIGN KEY (Course#) REFERENCES Course(Course#),
 	CONSTRAINT Class_FK2 FOREIGN KEY (InstructorID) REFERENCES Instructor(NetID),
@@ -147,10 +147,12 @@ CREATE TABLE Class (
 CREATE TABLE Enrollment (
 	StudentID CHAR(6) NOT NULL,
 	Class# CHAR(4) NOT NULL,
+	ClassSemester VARCHAR(10) NOT NULL,
+	ClassYear INT NOT NULL, 
 	ResultGrade VARCHAR(2) CHECK (ResultGrade IN ('A','A-','B','B-','C','C-','D','F','IP')) DEFAULT 'IP' NOT NULL,
-	CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#),
+	CONSTRAINT Enrollment_PK PRIMARY KEY (StudentID,Class#,,ClassSemester,ClassYear),
 	CONSTRAINT Enrollment_FK1 FOREIGN KEY (StudentID) REFERENCES Student(NetID),
-	CONSTRAINT Enrollment_FK2 FOREIGN KEY (Class#) REFERENCES Class(Class#)
+	CONSTRAINT Enrollment_FK2 FOREIGN KEY (Class#,ClassSemester,ClassYear) REFERENCES Class(Class#,ClassSemester,ClassYear)
 );
 				      
 -- Insert value to Location Entity
