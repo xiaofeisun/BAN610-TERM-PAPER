@@ -5,7 +5,7 @@ USE SCHEDULE;
 --Location Entity
 CREATE TABLE Location (
 	LocationID VARCHAR(10),
-	BuildingName VARCHAR(20) NOT NULL,
+	BuildingName VARCHAR(40) NOT NULL,
 	RoomNumber INT NOT NULL,
 	Floor INT NOT NULL,
 	Campus VARCHAR(20) CHECK (Campus in ('Hayward','Concord','Online')) NOT NULL,
@@ -71,8 +71,6 @@ CREATE TABLE Course (
 CREATE TABLE Publisher (
 	PublisherID INT CHECK (PublisherID BETWEEN 10000 AND 99999),
 	PublisherName VARCHAR(30) NOT NULL,
-	PublisherCity VARCHAR(20),
-	PublisherState VARCHAR(15), 
 	PublisherCountry VARCHAR(20) NOT NULL,
 	CONSTRAINT Publisher_PK PRIMARY KEY (PublisherID)
 );
@@ -96,14 +94,12 @@ CREATE TABLE Book (
 	AuthorID_1 INT NOT NULL,
 	AuthorID_2 INT,
 	AuthorID_3 INT,
-	AuthorID_4 INT,
 	PublisherID INT NOT NULL,
 	CONSTRAINT Book_PK PRIMARY KEY (ISBN),
 	CONSTRAINT Book_FK1 FOREIGN KEY (AuthorID_1) REFERENCES Author(AuthorID),
 	CONSTRAINT Book_FK2 FOREIGN KEY (AuthorID_2) REFERENCES Author(AuthorID),
 	CONSTRAINT Book_FK3 FOREIGN KEY (AuthorID_3) REFERENCES Author(AuthorID),
-	CONSTRAINT Book_FK4 FOREIGN KEY (AuthorID_4) REFERENCES Author(AuthorID),
-	CONSTRAINT Book_FK5 FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
+	CONSTRAINT Book_FK4 FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
 );
 				     
 -- Class Entity
