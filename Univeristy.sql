@@ -155,7 +155,7 @@ CREATE TABLE Enrollment (
 -- Insert value to Location Entity
 BULK
 INSERT Location
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Location.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -166,7 +166,7 @@ GO
 -- Insert value to PersonType Entity
 BULK
 INSERT PersonType
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\PersonType.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -177,7 +177,7 @@ GO
 -- Insert value to People Entity
 BULK
 INSERT People
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\People.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -188,7 +188,7 @@ GO
 -- Insert value to Student Entity
 BULK
 INSERT Student
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Student.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -199,7 +199,7 @@ GO
 -- Insert value to Instructor Entity
 BULK
 INSERT Instructor
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Instructor.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -210,7 +210,7 @@ GO
 -- Insert value to Course Entity
 BULK
 INSERT Course
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Course.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -221,7 +221,7 @@ GO
 -- Insert value to Publisher Entity
 BULK
 INSERT Publisher
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Publisher.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -232,7 +232,7 @@ GO
 -- Insert value to Author Entity
 BULK
 INSERT Author
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Author.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -243,7 +243,7 @@ GO
 -- Insert value to Book Entity
 BULK
 INSERT Book
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Book.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -254,7 +254,7 @@ GO
 -- Insert value to Class Entity
 BULK
 INSERT Class
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Class.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
@@ -265,7 +265,7 @@ GO
 -- Insert value to Enrollment Entity
 BULK
 INSERT Enrollment
-FROM 'FILE PATH'
+FROM 'C:\CSUEB\BAN610\Term Paper\Data Files\Enrollment.txt'
 WITH
 (
 	FIELDTERMINATOR=',',
