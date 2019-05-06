@@ -313,7 +313,7 @@ Group by StudentID,Enrollment.ClassYear;
 
 --5.	Display the instructors name and the number of course books prescribed by each instructor.
 select PFirstName [First Name], PLastName [Last Name], BookNo [Total Books Prescribed]
-from (select InstructorID, count(CourseBook_1)+count(CourseBook_2) AS BookNo
+from (select InstructorID, count(distinct CourseBook_1)+count(distinct CourseBook_2) AS BookNo
 from Class 
 Group by InstructorID
 Having count(CourseBook_1)is not null or count(CourseBook_2) is not null) Temp(NetID,BookNo), People
