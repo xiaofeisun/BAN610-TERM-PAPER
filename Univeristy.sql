@@ -286,7 +286,7 @@ from People, Student
 where Student.NetID=People.NetID
 and Student.NetID
 in (select StudentID from Enrollment, Class 
-where Course# ='BAN 610' and
+where Course# ='BAN610' and
 Enrollment.Class# = Class.Class# and 
 Enrollment.ClassSemester = Class.ClassSemester and 
 Enrollment.ClassYear = Class.ClassYear);
