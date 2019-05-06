@@ -280,7 +280,7 @@ select GraduationSemester [Graduation Semester], GraduationYear [Graduation Year
 count(*) [No of Students] from Student
 Group by GraduationSemester, GraduationYear;
 
---2.	Display the students name and major who have taken BAN 610.
+--2.	Display the students name and major who have taken BAN610.
 select PFirstName [First Name], PLastName [Last Name], Major
 from People, Student
 where Student.NetID=People.NetID
@@ -292,7 +292,7 @@ Enrollment.ClassSemester = Class.ClassSemester and
 Enrollment.ClassYear = Class.ClassYear);
 
 --3.	Display the NetID and student name of the students who have taken 
---		more than 8 courses in year 2018 (adjust the number of courses taken 
+--		more than 8 courses in year 2019 (adjust the number of courses taken 
 --		so that the query returns at least one result).
 select NetID, PFirstName [First Name], PLastName [Last Name] from People
 where NetID in
@@ -301,7 +301,7 @@ where ClassYear=2019
 Group by StudentID, ClassYear
 Having count(ClassYear)>8);
 
---4.	Display the NetID and the total credit hours taken by each student in 2018.
+--4.	Display the NetID and the total credit hours taken by each student in 2019.
 select StudentID, sum(CreditHours) [Total Credit Hours]
 from Enrollment, Class, Course
 where Enrollment.ClassYear=2019 and
